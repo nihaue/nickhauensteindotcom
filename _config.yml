@@ -1,0 +1,10 @@
+title: Nick Hauenstein
+description: Thoughts on software, technology, and other things.
+url: "https://nickhauenstein.com"
+baseurl: ""
+
+permalink: /blog/:year/:month/:day/:title/
+
+exclude:
+  - README.md
+  - LICENSE
