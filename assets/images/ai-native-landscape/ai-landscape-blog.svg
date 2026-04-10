@@ -1,0 +1,153 @@
+<svg id="chart-landscape" viewBox="0 0 900 850" width="800" xmlns="http://www.w3.org/2000/svg">
+      <rect width="900" height="850" fill="transparent"/>
+      <!-- Evolutionary AI fringe — strips from Level 3→4 inside the graph -->
+      <defs>
+        <!-- Gradient axis lines -->
+        <linearGradient id="axisGradX" x1="140" y1="0" x2="800" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#00e5ff"/>
+          <stop offset="100%" stop-color="#ff2e97"/>
+        </linearGradient>
+        <linearGradient id="axisGradY" x1="0" y1="720" x2="0" y2="60" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#00e5ff"/>
+          <stop offset="100%" stop-color="#ff2e97"/>
+        </linearGradient>
+        <linearGradient id="evoGradRight" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.08"/>
+          <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.30"/>
+        </linearGradient>
+        <linearGradient id="evoGradTop" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.08"/>
+          <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.30"/>
+        </linearGradient>
+        <linearGradient id="evoGradCorner" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.10"/>
+          <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.40"/>
+        </linearGradient>
+      </defs>
+      <!-- Right strip: Evolutionary Autonomy (process axis 3→4) -->
+      <rect x="717" y="60" width="83" height="660" fill="url(#evoGradRight)"/>
+      <text x="758" y="390" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#bc8cff" text-anchor="middle" transform="rotate(-90, 758, 390)" opacity="0.7">Evolutionary Autonomy →</text>
+      <!-- Top strip: Evolutionary Teams (architecture axis 3→4) -->
+      <rect x="140" y="60" width="660" height="83" fill="url(#evoGradTop)"/>
+      <text x="470" y="100" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#bc8cff" text-anchor="middle" opacity="0.7">Evolutionary Teams →</text>
+      <!-- Corner overlap (both axes 3→4) -->
+      <rect x="717" y="60" width="83" height="83" rx="4" fill="url(#evoGradCorner)"/>
+      <!-- Grid lines at each integer -->
+      <line x1="305" y1="60" x2="305" y2="720" stroke="#21262d" stroke-width="0.5" stroke-dasharray="4,6"/>
+      <line x1="470" y1="60" x2="470" y2="720" stroke="#30363d" stroke-width="1.5" stroke-dasharray="6,4"/>
+      <line x1="635" y1="60" x2="635" y2="720" stroke="#21262d" stroke-width="0.5" stroke-dasharray="4,6"/>
+      <line x1="800" y1="60" x2="800" y2="720" stroke="#21262d" stroke-width="0.5" stroke-dasharray="4,6"/>
+      <line x1="140" y1="555" x2="800" y2="555" stroke="#21262d" stroke-width="0.5" stroke-dasharray="4,6"/>
+      <line x1="140" y1="390" x2="800" y2="390" stroke="#30363d" stroke-width="1.5" stroke-dasharray="6,4"/>
+      <line x1="140" y1="225" x2="800" y2="225" stroke="#21262d" stroke-width="0.5" stroke-dasharray="4,6"/>
+      <line x1="140" y1="60"  x2="800" y2="60"  stroke="#21262d" stroke-width="0.5" stroke-dasharray="4,6"/>
+      <!-- Axes -->
+      <line x1="140" y1="720" x2="800" y2="720" stroke="url(#axisGradX)" stroke-width="2"/>
+      <line x1="140" y1="720" x2="140" y2="60"  stroke="url(#axisGradY)" stroke-width="2"/>
+      <!-- Axis labels -->
+      <text x="470" y="775" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#00e5ff" text-anchor="middle" font-weight="600">Process Maturity →</text>
+      <text x="60" y="390" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#00e5ff" text-anchor="middle" font-weight="600" transform="rotate(-90, 60, 390)">System Architecture →</text>
+      <!-- Tick marks and labels (0-4) -->
+      <text x="140" y="750" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#ADADAD" text-anchor="middle">0</text>
+      <text x="305" y="750" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#ADADAD" text-anchor="middle">1</text>
+      <text x="470" y="750" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#ADADAD" text-anchor="middle">2</text>
+      <text x="635" y="750" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#ADADAD" text-anchor="middle">3</text>
+      <text x="800" y="750" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#ADADAD" text-anchor="middle">4</text>
+      <text x="125" y="720" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#ADADAD" text-anchor="end">0</text>
+      <text x="125" y="555" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#ADADAD" text-anchor="end">1</text>
+      <text x="125" y="390" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#ADADAD" text-anchor="end">2</text>
+      <text x="125" y="225" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#ADADAD" text-anchor="end">3</text>
+      <text x="125" y="60"  font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#ADADAD" text-anchor="end">4</text>
+      <!-- Watermark zone names — centered in each quadrant -->
+      <text x="305" y="555" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#8b949e" text-anchor="middle" opacity="0.4" font-weight="600">Vibe Coding</text>
+      <text x="635" y="555" font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#58a6ff" text-anchor="middle" opacity="0.3" font-weight="600">Disciplined Prompting</text>
+      <text x="305" y="225" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#f0883e" text-anchor="middle" opacity="0.3" font-weight="600">Agentic Chaos</text>
+      <text x="635" y="225" font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#3fb950" text-anchor="middle" opacity="0.25" font-weight="700">Governed Autonomy</text>
+
+      <!-- ── TECHNOLOGY DOTS ────────────────────────────────── -->
+      <!-- Coordinate formula: x_svg = 140 + (x/4)*660, y_svg = 720 - (y/4)*660 -->
+      <!-- "Halfway to capability" principle: if a tool CAN do something, place it halfway there -->
+
+      <!-- ── (0, 0) Vibe Coding ── -->
+      <!-- ChatGPT (0.10, 0.10) → 156, 704 -->
+      <circle cx="156" cy="704" r="5" fill="#8b949e" opacity="0.9"/>
+      <text x="168" y="697" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#D6D6D6">ChatGPT</text>
+
+      <!-- ── (0.5, 2) Agentic Chaos ── -->
+      <!-- Auto-GPT (0.50, 2.00) → 222, 390 -->
+      <circle cx="222" cy="390" r="5" fill="#39d353" opacity="0.9"/>
+      <text x="234" y="390" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#D6D6D6">Auto-GPT</text>
+
+      <!-- ── (1, 0.5) Structured Patterns cluster ── -->
+      <circle cx="305" cy="638" r="55" fill="none" stroke="#21262d" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+      <!-- LangChain (0.75, 0.40) → 264, 654 -->
+      <circle cx="264" cy="654" r="5" fill="#f0883e" opacity="0.9"/>
+      <text x="247" y="666" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#D6D6D6" text-anchor="end">LangChain</text>
+      <!-- Cursor (0.85, 0.65) → 280, 613 -->
+      <circle cx="280" cy="613" r="5" fill="#58a6ff" opacity="0.9"/>
+      <text x="263" y="606" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#D6D6D6" text-anchor="end">Cursor</text>
+      <!-- Aider (1.15, 0.65) → 330, 613 -->
+      <circle cx="330" cy="613" r="5" fill="#58a6ff" opacity="0.9"/>
+      <text x="342" y="606" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#D6D6D6">Aider</text>
+      <!-- Google Jules (1.00, 0.35) → 305, 662 -->
+      <circle cx="305" cy="662" r="5" fill="#58a6ff" opacity="0.9"/>
+      <text x="317" y="662" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#D6D6D6">Google Jules</text>
+
+      <!-- ── (1.5, 1.25) ── -->
+      <!-- Devin (1.50, 1.25) → 388, 514 -->
+      <circle cx="388" cy="514" r="5" fill="#58a6ff" opacity="0.9"/>
+      <text x="373" y="507" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#D6D6D6" text-anchor="end">Devin</text>
+
+      <!-- ── Automated Orchestration × Multi-Agent cluster ── -->
+      <circle cx="490" cy="490" r="65" fill="none" stroke="#21262d" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+      <!-- LangGraph (2.00, 1.00) → 470, 555 -->
+      <circle cx="470" cy="538" r="5" fill="#f0883e" opacity="0.9"/>
+      <text x="455" y="548" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#D6D6D6" text-anchor="end">LangGraph</text>
+      <!-- Claude Code (1.85, 1.65) → 445, 448 -->
+      <circle cx="445" cy="448" r="5" fill="#58a6ff" opacity="0.9"/>
+      <text x="428" y="441" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#D6D6D6" text-anchor="end">Claude Code</text>
+      <!-- Copilot CLI (2.50, 1.50) → 552, 473 -->
+      <circle cx="552" cy="473" r="6" fill="#58a6ff" opacity="0.9"/>
+      <text x="564" y="473" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#D6D6D6">Copilot CLI</text>
+      <!-- Anthropic Pipeline (2.15, 1.00) → 495, 555 -->
+      <circle cx="495" cy="555" r="5" fill="#d29922" opacity="0.9"/>
+      <text x="507" y="555" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#D6D6D6">Anthropic Pipeline</text>
+      <!-- OpenClaw (2.30, 1.85) → 520, 415 -->
+      <circle cx="520" cy="415" r="5" fill="#f0883e" opacity="0.9"/>
+      <text x="532" y="415" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#D6D6D6">OpenClaw</text>
+
+      <!-- ── Automated Orchestration × Agent Organizations cluster ── -->
+      <circle cx="470" cy="390" r="50" fill="none" stroke="#21262d" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+      <!-- Stripe Minions (2.00, 2.00) → 470, 390 -->
+      <circle cx="455" cy="395" r="5" fill="#00e5ff" opacity="0.9"/>
+      <text x="430" y="388" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#D6D6D6" text-anchor="end">Stripe Minions</text>
+      <!-- Conductor + SDD (2.50, 2.00) → 552, 390 -->
+      <circle cx="552" cy="390" r="5" fill="#00e5ff" opacity="0.9"/>
+      <text x="564" y="390" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#D6D6D6">Conductor + SDD</text>
+      <!-- Squad SDK (1.25, 3.00) → 346, 225 -->
+      <!-- Process=1.25: Structured patterns (RPI, ceremonies as hooks), NOT automated orchestration -->
+      <!-- Arch=3.0: Watch mode (Ralph) = continuous AI org — always-on polling, signal-driven dispatch -->
+      <circle cx="346" cy="225" r="5" fill="#39d353" opacity="0.9"/>
+      <text x="358" y="225" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#D6D6D6">Squad</text>
+
+      <!-- ── Governed / Continuous zone ── -->
+      <!-- GasTown (1.75, 3.25) → 429, 184 -->
+      <!-- Process=1.75: Has formulas/refinery but governance is opt-in, throughput-first -->
+      <!-- Arch=3.25: Continuous AI org (Deacon patrols, Witness monitors, always-on watchdog chain) -->
+      <circle cx="429" cy="184" r="5" fill="#bc8cff" opacity="0.9"/>
+      <text x="414" y="177" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#D6D6D6" text-anchor="end">GasTown</text>
+      <!-- Paperclip (3.00, 3.15) → 635, 200 -->
+      <!-- Process=3.0: Governed Autonomy — mandatory approval gates, budget hard-stops, rollback, audit logs -->
+      <!-- Arch=3.15: Continuous AI org — heartbeat scheduling, always-on, multi-company -->
+      <!-- NOT evolutionary: Self-Organization and Automatic Organizational Learning are roadmap items, not shipped -->
+      <circle cx="635" cy="200" r="5" fill="#bc8cff" opacity="0.9"/>
+      <text x="647" y="200" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#D6D6D6">Paperclip</text>
+
+      <!-- ── (4, 0) Self-Improving Process ── -->
+      <!-- Autoresearch (3.90, 0.10) → 784, 704 -->
+      <circle cx="784" cy="704" r="5" fill="#8b5cf6" opacity="0.9"/>
+      <text x="770" y="697" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#D6D6D6" text-anchor="end">Autoresearch</text>
+
+      <!-- Callout removed for blog version -->
+    </svg>
+

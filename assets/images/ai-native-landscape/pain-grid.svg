@@ -1,0 +1,246 @@
+<svg id="chart-pain" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 905" font-family="Segoe UI, system-ui, sans-serif" width="100%">
+    <defs>
+      <filter id="glow-green" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+        <feColorMatrix in="blur" type="matrix"
+          values="0 0 0 0 0
+                  0 1 0 0 0.3
+                  0 0 0 0 0
+                  0 0 0 0.7 0" result="green-blur"/>
+        <feMerge>
+          <feMergeNode in="green-blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+      <filter id="glow-warn" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+        <feColorMatrix in="blur" type="matrix"
+          values="0 0 0 0 0.6
+                  0 0 0 0 0
+                  0 0 0 0 0
+                  0 0 0 0.5 0" result="red-blur"/>
+        <feMerge>
+          <feMergeNode in="red-blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+
+    <!-- Background -->
+    <rect width="900" height="905" fill="transparent" rx="8"/>
+
+    <!-- Title -->
+    <text x="450" y="22" text-anchor="middle" fill="#8b949e" font-size="11" font-style="italic">Hauenstein Model of Agentic Evolution</text>
+    <text x="450" y="46" text-anchor="middle" fill="#e6edf3" font-size="20" font-weight="700">The Pain Grid — Where AI-Native Engineering Hurts</text>
+    <text x="450" y="66" text-anchor="middle" fill="#8b949e" font-size="11">Not every step up and to the right is progress. Find where your organization can thrive.</text>
+
+    <!-- Axis titles -->
+    <text x="490" y="860" text-anchor="middle" fill="#c9d1d9" font-size="13" font-weight="600">Process Maturity →</text>
+    <text x="22" y="440" text-anchor="middle" fill="#c9d1d9" font-size="13" font-weight="600" transform="rotate(-90 22 440)">System Architecture →</text>
+
+    <!-- Grid constants: origin (130,90), cell 140×138, gap 6 -->
+    <!-- X tick labels (bottom) -->
+    <text x="200" y="800" text-anchor="middle" fill="#B0B0B0" font-size="9.5" font-weight="600">0</text>
+    <text x="200" y="814" text-anchor="middle" fill="#888" font-size="8">Vibe Coding</text>
+    <text x="346" y="800" text-anchor="middle" fill="#B0B0B0" font-size="9.5" font-weight="600">1</text>
+    <text x="346" y="814" text-anchor="middle" fill="#888" font-size="8">Structured Patterns</text>
+    <text x="492" y="800" text-anchor="middle" fill="#B0B0B0" font-size="9.5" font-weight="600">2</text>
+    <text x="492" y="814" text-anchor="middle" fill="#888" font-size="8">Automated Orchestration</text>
+    <text x="638" y="800" text-anchor="middle" fill="#B0B0B0" font-size="9.5" font-weight="600">3</text>
+    <text x="638" y="814" text-anchor="middle" fill="#888" font-size="8">Governed Autonomy</text>
+    <text x="784" y="800" text-anchor="middle" fill="#B0B0B0" font-size="9.5" font-weight="600">4</text>
+    <text x="784" y="814" text-anchor="middle" fill="#888" font-size="8">Evolutionary Autonomy</text>
+
+    <!-- Y tick labels (left) — Y=0 at bottom, Y=4 at top -->
+    <!-- Row SA=0 → bottom row (y pixel ~695) -->
+    <text x="125" y="700" text-anchor="end" fill="#B0B0B0" font-size="9.5" font-weight="600">0</text>
+    <text x="125" y="714" text-anchor="end" fill="#888" font-size="8">Single Agent</text>
+    <!-- Row SA=1 → y pixel ~549 -->
+    <text x="125" y="554" text-anchor="end" fill="#B0B0B0" font-size="9.5" font-weight="600">1</text>
+    <text x="125" y="568" text-anchor="end" fill="#888" font-size="8">Multi-Agent</text>
+    <!-- Row SA=2 → y pixel ~403 -->
+    <text x="125" y="408" text-anchor="end" fill="#B0B0B0" font-size="9.5" font-weight="600">2</text>
+    <text x="125" y="422" text-anchor="end" fill="#888" font-size="8">Agent Orgs</text>
+    <!-- Row SA=3 → y pixel ~257 -->
+    <text x="125" y="262" text-anchor="end" fill="#B0B0B0" font-size="9.5" font-weight="600">3</text>
+    <text x="125" y="276" text-anchor="end" fill="#888" font-size="8">Continuous AI Orgs</text>
+    <!-- Row SA=4 → y pixel ~111 -->
+    <text x="125" y="116" text-anchor="end" fill="#B0B0B0" font-size="9.5" font-weight="600">4</text>
+    <text x="125" y="130" text-anchor="end" fill="#888" font-size="8">Evolutionary Teams</text>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- GRID CELLS — 5 rows × 5 cols                   -->
+    <!-- Cell size: 134×130, gap 12                      -->
+    <!-- Col x: 133, 279, 425, 571, 717                  -->
+    <!-- Row y (SA=4 top → SA=0 bottom):                 -->
+    <!--   SA=4: 86,  SA=3: 228, SA=2: 370               -->
+    <!--   SA=1: 512, SA=0: 654                           -->
+    <!-- ═══════════════════════════════════════════════ -->
+
+    <!-- ── Row SA=0 (Single Agent) — bottom row y=654 ── -->
+    <!-- (0,0) amber-orange — "The 70% wall: fast for small things, then debugging code you didn't write" -->
+    <rect x="133" y="654" width="134" height="130" rx="6" fill="#f0883e" fill-opacity="0.5" stroke="#f0883e" stroke-opacity="0.25" stroke-width="1"/>
+    <text x="200" y="704" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.9">"Fast for throwaway,</text>
+    <text x="200" y="716" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.9">dangerous for production"</text>
+    <text x="200" y="732" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— 39% higher code churn (GitClear)</text>
+
+    <!-- (1,0) green — "The biggest single quality jump for individuals" -->
+    <rect x="279" y="654" width="134" height="130" rx="6" fill="#238636" fill-opacity="0.6" stroke="#238636" stroke-opacity="0.3" stroke-width="1"/>
+    <text x="346" y="704" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.95">"2-3× for bounded tasks,</text>
+    <text x="346" y="716" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.95">biggest single quality jump"</text>
+    <text x="346" y="732" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— Cursor, Aider sweet spot</text>
+
+    <!-- (2,0) yellow-amber — "LangChain backlash: framework ceremony exceeded task complexity" -->
+    <rect x="425" y="654" width="134" height="130" rx="6" fill="#d29922" fill-opacity="0.4" stroke="#d29922" stroke-opacity="0.2" stroke-width="1"/>
+    <text x="492" y="704" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.85">"Replaced 100s of lines</text>
+    <text x="492" y="716" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.85">with a few dozen API calls"</text>
+    <text x="492" y="732" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— Over-process for one agent</text>
+
+    <!-- (3,0) orange — "Parking brake on: 5× longer for zero benefit" -->
+    <rect x="571" y="654" width="134" height="130" rx="6" fill="#f0883e" fill-opacity="0.5" stroke="#f0883e" stroke-opacity="0.25" stroke-width="1"/>
+    <text x="638" y="704" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.9">"Adversarial audit for</text>
+    <text x="638" y="716" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.9">a console.log? Absurd"</text>
+    <text x="638" y="732" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— Governance crushes solo dev</text>
+
+    <!-- (4,0) red — "Evolutionary process for a single agent is nonsensical" -->
+    <rect x="717" y="654" width="134" height="130" rx="6" fill="#f85149" fill-opacity="0.4" stroke="#f85149" stroke-opacity="0.2" stroke-width="1"/>
+    <text x="784" y="704" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.85">"Self-improving workflow</text>
+    <text x="784" y="716" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.85">for one agent — why?"</text>
+    <text x="784" y="732" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— Absurd overhead</text>
+
+    <!-- ── Row SA=1 (Multi-Agent) — y=512 ── -->
+    <!-- (0,1) orange — "Agents step on each other's file edits, produce merge conflicts" -->
+    <rect x="133" y="512" width="134" height="130" rx="6" fill="#f0883e" fill-opacity="0.5" stroke="#f0883e" stroke-opacity="0.25" stroke-width="1"/>
+    <text x="200" y="562" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.9">"Agents undoing each</text>
+    <text x="200" y="574" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.9">other's work"</text>
+    <text x="200" y="590" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— Net negative productivity</text>
+
+    <!-- (1,1) green — "Separation of concerns works: $9 broken vs $200 works" -->
+    <rect x="279" y="512" width="134" height="130" rx="6" fill="#238636" fill-opacity="0.5" stroke="#238636" stroke-opacity="0.25" stroke-width="1"/>
+    <text x="346" y="562" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.9">"Separating planner from</text>
+    <text x="346" y="574" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.9">coder actually works"</text>
+    <text x="346" y="590" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— $9 broken → $200 works</text>
+
+    <!-- (2,1) bright green — "1,300 PRs/week merged at Stripe, zero human-written code" -->
+    <rect x="425" y="512" width="134" height="130" rx="6" fill="#3fb950" fill-opacity="0.5" stroke="#3fb950" stroke-opacity="0.3" stroke-width="1"/>
+    <text x="492" y="562" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.95">"Automated pipelines</text>
+    <text x="492" y="574" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.95">genuinely better"</text>
+    <text x="492" y="590" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— Industry convergence</text>
+
+    <!-- (3,1) green — "Good code but governance overhead exceeds single-task value" -->
+    <rect x="571" y="512" width="134" height="130" rx="6" fill="#238636" fill-opacity="0.4" stroke="#238636" stroke-opacity="0.2" stroke-width="1"/>
+    <text x="638" y="562" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.85">"Great quality but</text>
+    <text x="638" y="574" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.85">overkill per task"</text>
+    <text x="638" y="590" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— Governed but heavy</text>
+
+    <!-- (4,1) yellow — "Evolutionary process for simple multi-agent is over-engineering" -->
+    <rect x="717" y="512" width="134" height="130" rx="6" fill="#d29922" fill-opacity="0.4" stroke="#d29922" stroke-opacity="0.2" stroke-width="1"/>
+    <text x="784" y="562" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.85">"Workflow keeps changing</text>
+    <text x="784" y="574" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.85">for a simple pipeline"</text>
+    <text x="784" y="590" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— Over-engineering</text>
+
+    <!-- ── Row SA=2 (Agent Organizations) — y=370 ── -->
+    <!-- (0,2) red — "AutoGPT: $50+ in API credits, accomplished nothing" -->
+    <rect x="133" y="370" width="134" height="130" rx="6" fill="#f85149" fill-opacity="0.5" stroke="#f85149" stroke-opacity="0.25" stroke-width="1"/>
+    <text x="200" y="420" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.9">"Errors compound</text>
+    <text x="200" y="432" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.9">multiplicatively"</text>
+    <text x="200" y="448" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— Agent slop at scale</text>
+
+    <!-- (1,2) orange — "Managing each agent team manually is exhausting" -->
+    <rect x="279" y="370" width="134" height="130" rx="6" fill="#f0883e" fill-opacity="0.45" stroke="#f0883e" stroke-opacity="0.22" stroke-width="1"/>
+    <text x="346" y="420" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.88">"Manually poking each</text>
+    <text x="346" y="432" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.88">team is exhausting"</text>
+    <text x="346" y="448" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— Doesn't scale</text>
+
+    <!-- (2,2) green — "Stripe: 1,300 PRs/week with blueprint orchestration" -->
+    <rect x="425" y="370" width="134" height="130" rx="6" fill="#238636" fill-opacity="0.5" stroke="#238636" stroke-opacity="0.25" stroke-width="1"/>
+    <text x="492" y="420" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.9">"Orchestrated teams</text>
+    <text x="492" y="432" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.9">with quality gates work"</text>
+    <text x="492" y="448" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— Stripe, Conductor</text>
+
+    <!-- (3,2) bright green — "No agent marks its own homework — convergent finding" -->
+    <rect x="571" y="370" width="134" height="130" rx="6" fill="#3fb950" fill-opacity="0.5" stroke="#3fb950" stroke-opacity="0.3" stroke-width="1"/>
+    <text x="638" y="420" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.95">"No agent marks its</text>
+    <text x="638" y="432" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.95">own homework"</text>
+    <text x="638" y="448" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— Governed teams excel</text>
+
+    <!-- (4,2) yellow — "Process evolves faster than team culture can absorb" -->
+    <rect x="717" y="370" width="134" height="130" rx="6" fill="#d29922" fill-opacity="0.4" stroke="#d29922" stroke-opacity="0.2" stroke-width="1"/>
+    <text x="784" y="420" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.85">"Process changes faster</text>
+    <text x="784" y="432" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.85">than teams can absorb"</text>
+    <text x="784" y="448" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— Cultural lag</text>
+
+    <!-- ── Row SA=3 (Continuous AI Organizations) — y=228 ── -->
+    <!-- (0,3) deep red — "Agents self-assign, self-declare done, 24/7, nobody watching" -->
+    <rect x="133" y="228" width="134" height="130" rx="6" fill="#f85149" fill-opacity="0.6" stroke="#f85149" stroke-opacity="0.3" stroke-width="1"/>
+    <text x="200" y="278" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.9">"Agents self-assign work,</text>
+    <text x="200" y="290" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.9">self-declare done, 24/7"</text>
+    <text x="200" y="306" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— Nobody watching</text>
+
+    <!-- (1,3) orange — "Structure can't keep up with continuous operation" -->
+    <rect x="279" y="228" width="134" height="130" rx="6" fill="#f0883e" fill-opacity="0.5" stroke="#f0883e" stroke-opacity="0.25" stroke-width="1"/>
+    <text x="346" y="278" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.9">"Manual structure breaks</text>
+    <text x="346" y="290" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.9">at continuous speed"</text>
+    <text x="346" y="306" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— Can't scale the human</text>
+
+    <!-- (2,3) ORANGE (upgraded from yellow) — "No success stories without governance at this scale" -->
+    <rect x="425" y="228" width="134" height="130" rx="6" fill="#f0883e" fill-opacity="0.45" stroke="#f0883e" stroke-opacity="0.22" stroke-width="1"/>
+    <text x="492" y="278" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.88">"Green tests, broken code —</text>
+    <text x="492" y="290" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.88">verification gap widens"</text>
+    <text x="492" y="306" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— Attention gap unbridgeable</text>
+
+    <!-- (3,3) MAGIC GREEN with glow ★ — "Output quality meets manageable cognitive load" -->
+    <rect x="571" y="228" width="134" height="130" rx="6" fill="#3fb950" fill-opacity="0.6" stroke="#3fb950" stroke-width="2" filter="url(#glow-green)"/>
+    <text x="638" y="278" text-anchor="middle" fill="#FFF" font-size="9" font-weight="700" opacity="1">★ The sweet spot</text>
+    <text x="638" y="292" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.95">"Enough structure to prevent</text>
+    <text x="638" y="304" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.95">slop, enough automation</text>
+    <text x="638" y="316" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.95">to be worth the overhead"</text>
+
+    <!-- (4,3) yellow — "Continuous operation amplifies evolutionary instability" -->
+    <rect x="717" y="228" width="134" height="130" rx="6" fill="#d29922" fill-opacity="0.5" stroke="#d29922" stroke-opacity="0.25" stroke-width="1"/>
+    <text x="784" y="278" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.88">"Continuous ops amplify</text>
+    <text x="784" y="290" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.88">every process change"</text>
+    <text x="784" y="306" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— Instability compounds</text>
+
+    <!-- ── Row SA=4 (Evolutionary Teams) — top row y=86 ── -->
+    <!-- (0,4) deep red — "AutoGPT: recursive agent spawning, $50+, zero useful output" -->
+    <rect x="133" y="86" width="134" height="130" rx="6" fill="#f85149" fill-opacity="0.65" stroke="#f85149" stroke-opacity="0.3" stroke-width="1"/>
+    <text x="200" y="138" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.9">"Agents spawning agents</text>
+    <text x="200" y="150" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.9">spawning agents"</text>
+    <text x="200" y="166" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— Recursive chaos, no convergence</text>
+
+    <!-- (1,4) red — "Teams mutate between human interventions — can't keep up" -->
+    <rect x="279" y="86" width="134" height="130" rx="6" fill="#f85149" fill-opacity="0.5" stroke="#f85149" stroke-opacity="0.25" stroke-width="1"/>
+    <text x="346" y="138" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.9">"Teams evolve between</text>
+    <text x="346" y="150" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.9">your interventions"</text>
+    <text x="346" y="166" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— Too fast to guide</text>
+
+    <!-- (2,4) yellow — "YAML breaks every iteration as topology changes" -->
+    <rect x="425" y="86" width="134" height="130" rx="6" fill="#d29922" fill-opacity="0.5" stroke="#d29922" stroke-opacity="0.25" stroke-width="1"/>
+    <text x="492" y="138" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.88">"Static pipelines vs</text>
+    <text x="492" y="150" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.88">dynamic topology"</text>
+    <text x="492" y="166" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— YAML breaks every iteration</text>
+
+    <!-- (3,4) yellow-amber — "Only viable with automated governance — k8s autoscaling analogy" -->
+    <rect x="571" y="86" width="134" height="130" rx="6" fill="#d29922" fill-opacity="0.45" stroke="#d29922" stroke-opacity="0.22" stroke-width="1"/>
+    <text x="638" y="138" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.88">"Viable only with</text>
+    <text x="638" y="150" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.88">automated governance"</text>
+    <text x="638" y="166" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— Like k8s autoscaling</text>
+
+    <!-- (4,4) deep red with warning glow — "Red Queen dynamics: co-evolution never converges" -->
+    <rect x="717" y="86" width="134" height="130" rx="6" fill="#f85149" fill-opacity="0.65" stroke="#f85149" stroke-width="2" filter="url(#glow-warn)"/>
+    <text x="784" y="134" text-anchor="middle" fill="#FFF" font-size="8.5" font-weight="600" opacity="0.95">⚠ Goodhart's Law</text>
+    <text x="784" y="148" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.88">"Optimizes the metric,</text>
+    <text x="784" y="160" text-anchor="middle" fill="#FFF" font-size="8" opacity="0.88">loses the goal"</text>
+    <text x="784" y="176" text-anchor="middle" fill="#FFF" font-size="7" opacity="0.6">— Nothing stabilizes</text>
+
+    <!-- Legend -->
+    <rect x="133" y="882" width="14" height="10" rx="2" fill="#238636" fill-opacity="0.5"/>
+    <text x="152" y="891" fill="#999" font-size="8">Productive</text>
+    <rect x="230" y="882" width="14" height="10" rx="2" fill="#d29922" fill-opacity="0.45"/>
+    <text x="249" y="891" fill="#999" font-size="8">Mixed / Friction</text>
+    <rect x="350" y="882" width="14" height="10" rx="2" fill="#f85149" fill-opacity="0.55"/>
+    <text x="369" y="891" fill="#999" font-size="8">Painful</text>
+    <rect x="430" y="882" width="14" height="10" rx="2" fill="#3fb950" fill-opacity="0.6"/>
+    <text x="449" y="891" fill="#999" font-size="8">★ Sweet Spot</text>
+  </svg>
