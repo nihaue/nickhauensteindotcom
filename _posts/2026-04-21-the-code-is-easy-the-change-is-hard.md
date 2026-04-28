@@ -39,23 +39,130 @@ flowchart LR
 
 You do not care about contract history. `StartDate` is not serving a meaningful purpose. The obvious greenfield programmer move is to merge the contract fields into `SupportCustomer`, update the reads, update the writes, delete the old thing, and move on.
 
-The proposed end state may even be the right one. The danger is in treating the end state as if it can be reached in a single motion. The system might already be trying to carry mission-critical work, but still have failure modes nobody has experienced yet because nobody has had to move *backwards* through the change. If you roll back, do you lose data? Does the old schema still understand what the new code wrote? Can you safely move backwards at all, or are you stuck moving forward because the bridge behind you has already burned?
+However, you also can't necessarily apply the change everywhere all at once. There are requests in flight. There are queued jobs that were serialized against the old shape and will deserialize against the new one (or try to). Depending on how widely deployed the system is, it may not even be *physically possible* to update every running instance simultaneously -- you will have old code and new code running side by side, talking to the same data store, at the same time. Is the new write path safe to read from the old code path? Is the old write path safe to read from the new code path? If not, you have a window, even if it is extremely small, where data corruption is possible.
 
-This is also where modern AI models tend to mirror the same omission. Unless you directly challenge and prompt them to (1) consider both backwards and forwards compatibility, (2) design a strategy wherein the overall requested change could be completed as a series of non-breaking expansions of functionality with the option to go back, (3) decouple the *release* of the software bits from the *exposure* of the functionality, they will often produce the cleaner-looking destination without a safe path for getting there. In fact, in the future you might consider sharing this blog post with them before they make changes to ensure they're proceeding safely.
+Then there's the question of bugs that only reveal themselves in production. The new code path might be correct against every test you can write and still behave differently under real traffic patterns, real data distributions, real concurrency. You do not want that exposure hitting every customer simultaneously. You want to expose the new functionality slowly, measure it, compare it against the old path, and retain the ability to pull it back without leaving behind data that the old path can't interpret.
+
+The proposed end state may even be the right one. The danger is in treating the end state as if it can be reached in a single motion. Even if you assume you will simply deploy last-known good, the system may have failure modes nobody has experienced yet because nobody has had to move *backwards* through the change. If you roll back, do you lose data? Does the old schema still understand what the new code wrote? Can you safely move backwards at all, or are you stuck moving forward because the bridge behind you has already burned?
+
+This is also where driving change through modern AI models can still break down. Unless you directly challenge and prompt them to (1) consider both backwards and forwards compatibility, (2) design a strategy wherein the overall requested change could be completed as a series of non-breaking expansions of functionality with the option to go back, (3) decouple the *release* of the software bits from the *exposure* of the functionality, they will often produce the cleaner-looking destination without a safe path for getting there. In fact, in the future you might consider sharing this blog post with them before they make changes to ensure they're proceeding safely.
 
 A more mature sequence might look like this:[[1]](#footnotes)
 
-1. Add the new model version.
-1. Write to both versions.
-1. Backfill historical data.
-1. Read from the new version behind a feature flag.
-1. Cut off writes to the old version after the new path has proven itself.
+1. **Add the new model version** -- expand `SupportCustomer` with the fields it will eventually own.
+1. **Write to both versions** -- every write path updates both `SupportCustomer` and `SupportContract`.
+1. **Backfill historical data** -- copy existing contract records into `SupportCustomer`.
+1. **Read from the new version behind a feature flag** -- switch reads to `SupportCustomer`, gated for rollback.
+1. **Cut off writes to the old version** -- once the new read path has proven itself, stop dual-writing.
+
+Each of these intermediate states is independently deployable. Here is what the read and write activity looks like at each step:
+
+**Step 1: Add the new model version**
+
+```mermaid
+flowchart LR
+	Customer["<b>SupportCustomer</b><br/><br/>Id<br/>ContactName<br/>CompanyName<br/>Address<br/><strong>Tier</strong><br/><strong>EndDate</strong>"]
+	Contract["<b>SupportContract</b><br/><br/>Id<br/>CustomerId<br/>StartDate<br/>Tier<br/>EndDate"]
+
+	Customer -. "joined by CustomerId" .- Contract
+
+	style Customer fill:#132f4c,stroke:#58a6ff,color:#e6edf3
+	style Contract fill:#0d3321,stroke:#3fb950,color:#e6edf3
+	linkStyle 0 stroke:#8b949e,stroke-width:2px,stroke-dasharray:5 5
+```
+
+Nothing changes about reads or writes yet. You are only expanding the schema. The app still reads from and writes to `SupportContract` exactly as it did before. This is a pure additive change -- the kind of deploy you can do with zero risk because nothing depends on the new columns yet.
+
+**Step 2: Write to both versions**
+
+```mermaid
+flowchart LR
+	App(["<b>App</b>"])
+	Customer["<b>SupportCustomer</b>"]
+	Contract["<b>SupportContract</b>"]
+	Flag{"Feature Flag"}
+
+	App --> Flag ==>|"writes"| Customer
+	App ==>|"writes"| Contract
+	Contract -.->|"reads"| App
+
+	style App fill:#4a2600,stroke:#f0883e,color:#e6edf3
+	style Customer fill:#132f4c,stroke:#58a6ff,color:#e6edf3
+	style Contract fill:#0d3321,stroke:#3fb950,color:#e6edf3
+	style Flag fill:#2d1548,stroke:#bc8cff,color:#e6edf3
+```
+
+Every write path now updates both `SupportCustomer` and `SupportContract` -- but the writes to `SupportCustomer` are gated behind a feature flag. If the dual-write logic itself introduces bugs (and it can -- new serialization paths, transaction scope changes, subtle ordering issues), you flip the flag and the writes stop. Nobody is reading from `SupportCustomer` yet, so turning off the dual-write has zero customer impact. Reads of `Tier` and `EndDate` still come from `SupportContract` -- it remains the authoritative source. Old instances and new instances can coexist safely during this step because they all still read from the same place.
+
+**Step 3: Backfill historical data**
+
+```mermaid
+flowchart LR
+	App(["<b>App</b>"])
+	Customer["<b>SupportCustomer</b>"]
+	Contract["<b>SupportContract</b>"]
+	Flag{"Feature Flag"}
+
+	App --> Flag ==>|"writes"| Customer
+	App ==>|"writes"| Contract
+	Contract -.->|"reads"| App
+	Contract -->|"backfill"| Customer
+
+	style App fill:#4a2600,stroke:#f0883e,color:#e6edf3
+	style Customer fill:#132f4c,stroke:#58a6ff,color:#e6edf3
+	style Contract fill:#0d3321,stroke:#3fb950,color:#e6edf3
+	style Flag fill:#2d1548,stroke:#bc8cff,color:#e6edf3
+	linkStyle 4 stroke:#f0883e,stroke-width:2px
+```
+
+You have been dual-writing since step 2, so all new records are represented in both places. But the historical data -- everything written before dual-writes began -- only exists in `SupportContract`. This step copies it into `SupportCustomer` so the new model has complete coverage. Once the backfill is verified, `SupportCustomer` holds the same data as `SupportContract` for every record, past and present.
+
+**Step 4: Read from the new version behind a feature flag**
+
+```mermaid
+flowchart LR
+	App(["<b>App</b>"])
+	Customer["<b>SupportCustomer</b>"]
+	Contract["<b>SupportContract</b>"]
+	Flag{"Feature Flag"}
+
+	App ==>|"writes"| Customer
+	App ==>|"writes"| Contract
+	Customer -.-> Flag -.->|"reads"| App
+
+	style App fill:#4a2600,stroke:#f0883e,color:#e6edf3
+	style Customer fill:#132f4c,stroke:#58a6ff,color:#e6edf3
+	style Contract fill:#0d3321,stroke:#3fb950,color:#e6edf3
+	style Flag fill:#2d1548,stroke:#bc8cff,color:#e6edf3
+```
+
+Now you switch the read path to pull from `SupportCustomer` instead of `SupportContract` -- but only for traffic gated behind a feature flag. You expose it to a small percentage of requests (or specific tenants, or internal users first) and compare the behavior against the old path. If anything looks wrong, you flip the flag and reads go back to `SupportContract` instantly. Dual-writes are still running, so both models stay current regardless of which one you are reading from.
+
+**Step 5: Cut off writes to the old version**
+
+```mermaid
+flowchart LR
+	App(["<b>App</b>"])
+	Customer["<b>SupportCustomer</b>"]
+	Contract["<b>SupportContract</b>"]
+
+	App ==>|"writes"| Customer
+	App -.->|"✕ stopped"| Contract
+	Customer -.->|"reads"| App
+
+	style App fill:#4a2600,stroke:#f0883e,color:#e6edf3
+	style Customer fill:#132f4c,stroke:#58a6ff,color:#e6edf3
+	style Contract fill:#0d3321,stroke:#3fb950,color:#e6edf3
+	linkStyle 1 stroke:#f85149,stroke-width:2px,stroke-dasharray:5 5
+```
+
+After sufficient evidence that the new read path is healthy -- and after the feature flag has been fully opened -- you stop writing to `SupportContract`. At this point, `SupportCustomer` is the single authoritative source. `SupportContract` can be cleaned up later (and "later" might be weeks or months, not in the few hours you might have a Copilot CLI terminal up and running).
 
 The precise steps above aren't the point, it's the posture behind them. Every intermediate state of the codebase should be deployable, observable, and reversible. As Mike Brittain put it when describing the culture behind Etsy's continuous deployment practice:
 
 > "We don't optimize for being right. We optimize for detecting when we're wrong."
 
-The five-step sequence exists because it gives you places to detect when you're wrong and respond without catastrophe. That is the next level of planning AI needs to be able to tackle cleanly. And it is exactly the level that current AI coding tools skip -- because they are still oriented almost entirely around being right on the first pass.
+The five-step sequence exists because it gives you places to detect when you're wrong and respond without catastrophe. This is exactly the level that most current AI coding tools skip -- because they are still oriented almost entirely around being right on the first pass.
 
 ## A True Engineering Agent
 
