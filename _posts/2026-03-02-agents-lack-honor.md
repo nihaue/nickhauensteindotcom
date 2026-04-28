@@ -36,7 +36,7 @@ The behavior change was *immediate* and *repeatable* across all major models fro
 
 ## Confabulations
 
-I think you will find that, both in my blog and real life, I don't typically speak like a research paper, or use overly academic language. For some that is an immediate turn-off, for others I hope it is a bridge to common understanding an dialogue amongst practitioners.
+I think you will find that, both in my blog and real life, I don't typically speak like a research paper, or use overly academic language. For some that is an immediate turn-off, for others I hope it is a bridge to common understanding and dialogue amongst practitioners.
 
 That said, if you wanted to sound like a research paper yourself when talking about such things, one might describe what I observed and mitigated as an **evidence-free confabulation caused by ungrounded tool hallucination under accuracy-biased incentives**. In other words under weak incentives and with no verification, LLMs will satisfy the interface contract, not the epistemic one. They're not lying per se -- certainly not at all in the moral sense -- they're making a factual claim without performing the required grounding action likely because they're optimizing for completion under underspecified constraints.
 
